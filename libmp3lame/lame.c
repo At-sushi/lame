@@ -180,7 +180,8 @@ lame_init_params_ppflt(lame_internal_flags * gfc)
             fc1 = 1.0f;
         }
         if (cfg->lowpass2 > cfg->lowpass1) {
-            fc2 = max(filter_coef((freq - cfg->lowpass1)  / (cfg->lowpass2 - cfg->lowpass1 + 1e-20)), (freq < 41000.0 / cfg->samplerate_out) ? 0.15 : 0.0);
+            fc2 = max(filter_coef((freq - cfg->lowpass1)  / (cfg->lowpass2 - cfg->lowpass1 + 1e-20)),
+					  cfg->vbr != vbr_off && (freq < 41000.0 / cfg->samplerate_out) ? 0.15 : 0.0);
         }
         else {
             fc2 = 1.0f;
